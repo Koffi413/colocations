@@ -1,6 +1,7 @@
 import Taches from "~/server/models/tache.model.js";
 /**
- * Le rôle de ce controlleur est de mettre en relation la vue et le modèle
+ * Le rôle de ce controlleur est de mettre en relation la vue et le modèle tache
+ * 
  * il se chagera du formatage des données reçu depuis le modèle Taches avant de les transmettre à la vue
  * Il gère les fonctionnalités lier au taches
  * 1. Récupération
