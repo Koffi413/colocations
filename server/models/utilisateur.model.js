@@ -28,12 +28,14 @@ class Utilisateurs {
         /**
          * connexion à la base de donnée
          * */
+
         const connexion = await db_connection();
         //verifier que l'username et l'email ne sont pas déjà utilitsés
         //hashage password de l'utilisateur avant insertion
         const hashpass = await bcrypt.hash(this.#password, 10)
         //insertion dans la bd
         await connexion.execute ("INSERT INTO utilisateur (username,email,mot_de_passe) values (?,?,?)",[this.#username,this.#email,hashpass])
+        await connexion.destroy()
     }
     /**
      * vérification pour la connexion utilisateur
@@ -43,20 +45,21 @@ class Utilisateurs {
     async connexionUtilisateur(utilisateur) {
         const connexion = await db_connection();
         const match = await bcrypt.compare(this.#password, utilisateur.mot_de_passe);
-
         return match ? true : false;
     }
     /**
      * @returns{boolean,Array<Utilisateurs>}
      * */
-    async trouverUtilisateur(username, email) {
+    static async trouverUtilisateur(username, email) {
         const connexion = await db_connection();
         const [existe] = await connexion.execute( "SELECT * FROM utilisateur WHERE email = ? or username = ?", [email,username]);
         //si le tableau retourné n'est pas vide alors retourné vrai
         if (existe.length > 0){
             return {trouver:true, user: existe[0]}
+            await connexion.destroy()
         }
         return {trouver:false, user:[]}
+        await connexion.destroy()
     }
 }
 export default (Utilisateurs);
