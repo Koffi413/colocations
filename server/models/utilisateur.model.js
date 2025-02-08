@@ -49,9 +49,9 @@ class Utilisateurs {
     /**
      * @returns{boolean,Array<Utilisateurs>}
      * */
-    async trouverUtilisateur(){
+    async trouverUtilisateur(username, email) {
         const connexion = await db_connection();
-        const [existe] = await connexion.execute( "SELECT * FROM utilisateur WHERE email = ? or username = ?", [this.#email,this.#username]);
+        const [existe] = await connexion.execute( "SELECT * FROM utilisateur WHERE email = ? or username = ?", [email,username]);
         //si le tableau retourné n'est pas vide alors retourné vrai
         if (existe.length > 0){
             return {trouver:true, user: existe[0]}

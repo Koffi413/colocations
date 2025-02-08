@@ -6,18 +6,16 @@ class Taches {
     #date_debut
     #date_fin
     #username
-    #etat
+    #status
     #type
-    constructor(id,libelle,date_debut,date_fin,username,etat,type) {
+    constructor(id,libelle,date_debut,date_fin,username,status,type) {
         this.#id = id;
-        this.libelle = libelle;
-        this.date_debut = date_debut;
-        this.date_fin = date_fin;
-        this.date_debut = date_debut;
-        this.date_fin = date_fin;
-        this.username = username;
-        this.etat = etat;
-        this.type = type;
+        this.#libelle = libelle;
+        this.#date_debut = date_debut;
+        this.#date_fin = date_fin;
+        this.#username = username;
+        this.#status = status;
+        this.#type = type;
     }
     /**
      * Ajouter une tache à un utilisateur en passant en son username en paramètre
@@ -25,7 +23,7 @@ class Taches {
     async ajoutTaches(username){
         const connexion = await db_connection()
         await connexion.execute(
-            "INSERT INTO taches (libelle,type,etat,date_debut,date_fin,username) values (?,?,?,?,?,?)",[this.#libelle,this.#type,this.#etat,this.#date_debut,this.#date_fin,this.#username])
+            "INSERT INTO taches (libelle,type,status,date_debut,date_fin,username) values (?,?,?,?,?,?)",[this.#libelle,this.#type,this.#status,this.#date_debut,this.#date_fin,this.#username])
     }
     /**
      * Supprimer une tache (en fonction de son id dans la base de données)
@@ -39,19 +37,19 @@ class Taches {
      * @param{string} username
      * @return{Array<Taches>}
      * */
-    async trouverTaches(username) {
+    static async trouverTaches(username) {
         const connexion = await db_connection()
         const [taches] = await connexion.execute("SELECT * FROM taches WHERE username=?",[username])
         return taches
     }
     /**
-     * Changer l'etat d'une tache (1: Terminé,2: Aucun)
-     *@param{int}etat
+     * Changer l'etat d'une tache ("Terminé","Aucun")
+     *@param{string}status
      * @return{Taches}
      * */
-    async changerEtat(etat){
+    async changerEtat(status){
         const connexion = await db_connection()
-        await connexion.execute("UPDATE taches SET id_etat = ? where id = ?",[etat,this.#id])
+        await connexion.execute("UPDATE taches SET status = ? where id = ?",[status,this.#id])
         return this.Taches
     }
     /**
