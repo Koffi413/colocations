@@ -1,18 +1,17 @@
 // stores/dataStore.js
 import { defineStore } from 'pinia';
-export const useWebsiteStore = defineStore('identite', {
+export const useWebsiteStore = defineStore('profil', {
   state: () => ({
     utilisateur: {},
+    tache:[],
     connecte: false
   }),
   actions: {
-    /**
-     * 
-     * @param {Utilisateurs} val
-     */
     stockeInfos(val) {
       this.utilisateur = val
     },
-    
+    stockeTaches(val) {
+      this.tache = val
+    }
   }
 })

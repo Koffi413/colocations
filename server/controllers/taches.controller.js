@@ -16,8 +16,5 @@ import Taches from "~/server/models/tache.model.js";
 //2. formattage du message et envoi du tableau des taches de l'utilisateur
 export async function recupererTachesUtilisateur(username){
     const taches = await Taches.trouverTaches(username)
-    if (taches.length === 0){
-        return {message:"Aucune tâche pour le moment", tache: taches}
-    }
-    return {message:"", tache: taches}
+    return taches;
 }

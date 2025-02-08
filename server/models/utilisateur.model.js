@@ -35,20 +35,23 @@ class Utilisateurs {
         const hashpass = await bcrypt.hash(this.#password, 10)
         //insertion dans la bd
         await connexion.execute ("INSERT INTO utilisateur (username,email,mot_de_passe) values (?,?,?)",[this.#username,this.#email,hashpass])
-        await connexion.destroy()
     }
     /**
      * vérification pour la connexion utilisateur
      * @param {Utilisateurs} utilisateur
+     * @param {string}password
      * @return{boolean}
      */
-    async connexionUtilisateur(utilisateur) {
+    static async connexionUtilisateur(utilisateur,password) {
         const connexion = await db_connection();
-        const match = await bcrypt.compare(this.#password, utilisateur.mot_de_passe);
-        return match ? true : false;
+        const match = await bcrypt.compare(password, utilisateur.mot_de_passe);
+        if (match) {
+            return true
+        }
+        return false
     }
     /**
-     * @returns{boolean,Array<Utilisateurs>}
+     * @returns{{boolean, Utilisateurs[]}}
      * */
     static async trouverUtilisateur(username, email) {
         const connexion = await db_connection();
@@ -56,10 +59,8 @@ class Utilisateurs {
         //si le tableau retourné n'est pas vide alors retourné vrai
         if (existe.length > 0){
             return {trouver:true, user: existe[0]}
-            await connexion.destroy()
         }
         return {trouver:false, user:[]}
-        await connexion.destroy()
     }
 }
 export default (Utilisateurs);

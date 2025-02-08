@@ -18,18 +18,39 @@ import Utilisateurs from "../models/utilisateur.model.js";
 
 //function d'inscription
 export async function inscriptionUtilisateur(username,email,password){
+
     //Etape 1 - instanciation d'un nouvel utilisateur avec ses informations reçu de la vue
+
     const nouvelUtilisateur = new Utilisateurs(username,email,password);
+
     //Etape 2 - vérifier que son username et/ou son email n'existe pas déjà dans la base de données
-    const rechercheUtilisateur = await Utilisateurs.trouverUtilisateur(username,email);
+
+    const rechercheUtilisateur = await Utilisateurs.trouverUtilisateur(username, email);
     if(rechercheUtilisateur.trouver){
         return false
     }
     //Etape 3 - hasher son mot de passe; étape se réalisant directement dans la methode de la classe avant ajout dans la base de données
      await nouvelUtilisateur.inscriptionUtilisateur()
     //Etape 4 - vérification qu'il est bien isncrit en effectuant une recher basée sur son nom d'utilisateur
-    const trouverUtilisateur = await Utilisateurs.trouverUtilisateur(username,email);
+    const trouverUtilisateur = await Utilisateurs.trouverUtilisateur(username, email);
     if (trouverUtilisateur.trouver){
         return true
     }
+}
+//Étape pour la connexion d'un utilisateur
+//1. vérifier que son username est inscrit dans la base de données
+//2. Vérifier la correspondance du mot de passe
+//3. s'il est retrouver envoyer une reponse vraie et l'utilisateur à la vue
+
+//function connexion
+export async function connexionUtilisateur(username,password){
+    const existe = await Utilisateurs.trouverUtilisateur(username,null);
+    if (existe.trouver){
+        const correctPassword =await Utilisateurs.connexionUtilisateur(existe.user,password)
+        if (correctPassword){
+            return true
+        }
+        return false
+    }
+    return false;
 }

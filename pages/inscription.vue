@@ -16,7 +16,8 @@ email: '',
 password: '',
 })
 const dataUser = useWebsiteStore()
-dataUser.utilisateur = infosUtilisateur;
+dataUser.connecte =false;
+localStorage.setItem("username",infosUtilisateur.username)
 const router = useRouter()
 async function inscription() {
     const response = await $fetch("/api/inscription",{
@@ -24,7 +25,11 @@ async function inscription() {
       body: infosUtilisateur
     })
     if (response) {
+      localStorage.setItem("username",infosUtilisateur.username)
+      dataUser.utilisateur = infosUtilisateur.username
       await router.push("/compte")
+    }else {
+      localStorage.removeItem("username")
     }
 }
 </script>

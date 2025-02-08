@@ -51,6 +51,7 @@ class Taches {
         const connexion = await db_connection()
         await connexion.execute("UPDATE taches SET status = ? where id = ?",[status,this.#id])
         return this.Taches
+        await connexion.destroy()
     }
     /**
      * Changer le type d'une tâche
