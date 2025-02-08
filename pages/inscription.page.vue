@@ -13,4 +13,5 @@ username: '',
 email: '',
 password: '',
 })
+
 </script>
