@@ -9,6 +9,7 @@
 <script setup>
 import { useWebsiteStore } from '../stores/dataUsers.store.js'
 import { reactive } from 'vue'
+import { useRouter } from 'vue-router'
 const infosUtilisateur = reactive({
 username: '',
 email: '',
@@ -16,17 +17,14 @@ password: '',
 })
 const dataUser = useWebsiteStore()
 dataUser.utilisateur = infosUtilisateur;
+const router = useRouter()
 async function inscription() {
-  try {
     const response = await $fetch("/api/inscription",{
       method: 'POST',
       body: infosUtilisateur
     })
     if (response) {
-      console.log(response)
+      await router.push("/compte")
     }
-  }catch (e) {
-    console.error(e)
-  }
 }
 </script>

@@ -23,14 +23,13 @@ export async function inscriptionUtilisateur(username,email,password){
     //Etape 2 - vérifier que son username et/ou son email n'existe pas déjà dans la base de données
     const rechercheUtilisateur = await Utilisateurs.trouverUtilisateur(username,email);
     if(rechercheUtilisateur.trouver){
-        return []
+        return false
     }
     //Etape 3 - hasher son mot de passe; étape se réalisant directement dans la methode de la classe avant ajout dans la base de données
      await nouvelUtilisateur.inscriptionUtilisateur()
     //Etape 4 - vérification qu'il est bien isncrit en effectuant une recher basée sur son nom d'utilisateur
     const trouverUtilisateur = await Utilisateurs.trouverUtilisateur(username,email);
     if (trouverUtilisateur.trouver){
-        const compte = trouverUtilisateur.user
-        return compte
+        return true
     }
 }
