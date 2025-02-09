@@ -1,4 +1,5 @@
 <template>
+  <Header/>
   <form @submit.prevent="connexion">
     <input type="text" v-model="form.username" placeholder="username"><br><br>
     <input type="password" v-model="form.password" placeholder="password" a><br><br>

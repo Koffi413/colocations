@@ -1,4 +1,5 @@
 <template>
+  <Header/>
     <form @submit.prevent="inscription">
         <input type="text" id="fnom" v-model="infosUtilisateur.username" placeholder="username"><br><br>
         <input type="email" id="femail" v-model="infosUtilisateur.email" placeholder="email"><br><br>
