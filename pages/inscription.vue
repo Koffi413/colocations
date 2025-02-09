@@ -10,15 +10,16 @@
 import { useWebsiteStore } from '../stores/dataUsers.store.js'
 import { reactive } from 'vue'
 import { useRouter } from 'vue-router'
+
+
 const infosUtilisateur = reactive({
 username: '',
 email: '',
 password: '',
 })
 const dataUser = useWebsiteStore()
-dataUser.connecte =false;
-localStorage.setItem("username",infosUtilisateur.username)
 const router = useRouter()
+
 async function inscription() {
     const response = await $fetch("/api/inscription",{
       method: 'POST',
@@ -27,6 +28,7 @@ async function inscription() {
     if (response) {
       localStorage.setItem("username",infosUtilisateur.username)
       dataUser.utilisateur = infosUtilisateur.username
+      dataUser.connecte = true
       await router.push("/compte")
     }else {
       localStorage.removeItem("username")

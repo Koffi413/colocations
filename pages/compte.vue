@@ -1,8 +1,11 @@
 <script setup>
+definePageMeta({
+  middleware: 'auth'
+})
 const profil = useWebsiteStore()
-profil.connecte=true
 const username = ref(null)
 onMounted(() => {
+    profil.connecte=true
     profil.utilisateur = localStorage.getItem('username')
     username.value = localStorage.getItem("username")
     const searchTaches = async () => {
@@ -12,16 +15,15 @@ onMounted(() => {
         })
       profil.stockeTaches(taches)
     }
-    searchTaches()
+  searchTaches()
 })
-
 </script>
 
 <template>
   <h1 v-if="username">Bienvenue {{ username }}</h1>
-  <div v-if="profil.tache">{{profil.tache[0]}}</div>
   <div v-else>Vous n'avez pas encore de taches</div>
-  <div>{{profil}}</div>
+  <div v-for="taches in profil.stockeTaches" :key="taches.id">{{taches.libele}}</div>
+
 </template>
 
 <style scoped>
