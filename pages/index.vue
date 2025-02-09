@@ -6,6 +6,7 @@
         <NuxtLink to="/inscription">S'inscrire</NuxtLink> <br><br>
         <NuxtLink to="/connexion">Se connecter</NuxtLink>
     </p>
+  <Botton/>
 </template>
 <script setup lang="ts">
 import Header from "~/components/Header.vue";
