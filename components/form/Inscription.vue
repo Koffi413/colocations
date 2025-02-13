@@ -13,7 +13,7 @@ const dataUser = useWebsiteStore()
 const router = useRouter()
 
 async function inscription() {
-  const response = await $fetch("/api/inscription",{
+  const response = await $fetch("/api/inscriptionUtilisateurs",{
     method: 'POST',
     body: infosUtilisateur
   })

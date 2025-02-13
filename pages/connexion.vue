@@ -17,7 +17,7 @@ const form = ref({
 const data = useWebsiteStore()
 const router = useRouter();
 async function connexion() {
-    const reponse = await $fetch("/api/connexion",{method:'POST',body:form.value})
+    const reponse = await $fetch("/api/connexionUtilisateurs",{method:'post',body:form.value})
     if (reponse === true){
       localStorage.setItem('username',form.value.username)
       await router.push('/compte')
