@@ -14,7 +14,7 @@ const accueil = computed(() => router.path ==="/")
     <div class="bloc-nav">
       <nav class="navbar">
         <svg  width="400" height="100%" viewBox="0 0 400 200" xmlns="http://www.w3.org/2000/svg">
-          <text class="path" x="50" y="100" font-size="10rem" font-weight="500" font-family="'Brush Script MT',cursive" fill="white" >
+          <text class="path" x="50" y="100" font-size="10rem" font-weight="500" font-family="'Brush Script MT',cursive" fill="black" >
             Todolist
           </text>
 
@@ -33,7 +33,6 @@ header {
   height: 10vh;
   display: flex;
   align-items: center;
-  background-color:  #FF4612;
   border-radius: 10px;
 }
 .logo{
@@ -66,7 +65,7 @@ header {
 }
 .nav-link{
   text-decoration: none;
-  color: white;
+  color: black;
 }
 /*
 }
