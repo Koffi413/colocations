@@ -1,4 +1,7 @@
 <script setup>
+import IslandRenderer from "#app/components/island-renderer.js";
+import {ref, watch} from "#imports";
+
 definePageMeta({
   middleware: 'auth'
 })
@@ -17,15 +20,33 @@ onMounted(() => {
     }
   searchTaches()
 })
+const show = ref(false)
+watch(()=> profil.utilisateur, (newValue) => {
+  if(newValue!==null){
+    show.value = true
+  }
+},{deep:true})
 </script>
 
 <template>
-  <h1 v-if="username">Bienvenue {{ username }}</h1>
-  <div v-else>Vous n'avez pas encore de taches</div>
-  <div v-for="taches in profil.stockeTaches" :key="taches.id">{{taches.libele}}</div>
-
+  <div class="compte">
+    <div class="bord">
+    <Dashboard/>
+    </div>
+    <div class="content">
+      <h2 v-if="show">Bonjour {{ profil.utilisateur}}</h2>
+      <p>Aujord'hui est le</p>
+      <ListeTaches :taches=profil.tache />
+    </div>
+  </div>
 </template>
-
 <style scoped>
-
+.compte{
+  background-color: #aaa;
+  margin: 0;
+  padding: 0;
+  height: 100vh;
+  display: flex;
+  gap: 30%;
+}
 </style>
