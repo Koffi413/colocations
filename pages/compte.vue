@@ -47,6 +47,9 @@ watch(()=> profil.utilisateur, (newValue) => {
   padding: 0;
   height: 100vh;
   display: flex;
-  gap: 30%;
+  gap: 26%;
+}
+.content{
+  width: 65%;
 }
 </style>
