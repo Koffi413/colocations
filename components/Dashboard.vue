@@ -17,6 +17,6 @@ aside{
   text-align:center;
   border-radius: 10px 10px;
   position:absolute;
-  background-color: white;
+  background-color: #ffffff;
 }
 </style>

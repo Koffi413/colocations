@@ -1,52 +1,65 @@
 <script setup>
-import { ref } from '#imports';
-const date = ref(new Date());
-
-const attrs = ref([
-  {
-    key: 'today',
-    highlight: {
-      color: 'green',
-      fillMode: 'solid',
-    },
-    dates: new Date(),
-  },
-]);
+import {ref} from '#imports'
+const display = ref(null)
+const jour = reactive({})
+const recu = (message, date) => {
+  display.value = message
+  jour.value = date
+}
+const heures = ref(false)
+const heure = () => {
+  if (heures.value) {
+    heures.value = false
+  }
+  else {
+    heures.value = true
+  }
+}
 </script>
 
 <template>
-  <div class="form">
-    <label for="">
-      <input type="checkbox">
-      <input type="text" placeholder="créer une tache"/>
-    </label><br>
-    <client-only>
-      <VDatePicker v-model="date" :attributes="attrs" />
-    </client-only>
-    <div class="buttons">
-      <button>définir l'heure</button>
-      <button>sauvegarder</button>
+  <div class="container">
+    <InputLibelleTache :show="display" :choix="jour" />
+    <Calendrier  :heure="heures" @display="recu" />
+    <div class="calendrier_footer">
+      <button @click="heure" class="calendrier_boutton_heure">Définir une heure</button>
+      <button class="calendrier_boutton_sauvegarde">Enregistrer</button>
     </div>
   </div>
 </template>
 
-<style scoped>
-.form {
-  position: absolute;
-  margin: 100px 300px;
-  border: 1px solid #ccc;
-  box-shadow: 1px 1px 1px #ccc;
-  width: fit-content;
-  padding: 10px;
-  display: block;
-  text-align: center;
-}
-.buttons {
+<style scoped >
+.container {
+  background-color: white;
+  border:none;
+  border-radius: 10px;
   width: 50%;
-  margin: auto;
+  margin: 0;
+  padding: 5px 0;
+  height: fit-content;
+  box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
 }
-button {
+.calendrier_footer {
   display: block;
-  margin: 5px;
+  margin: auto;
+  width: 95%;
 }
+
+.calendrier_boutton_heure,
+.calendrier_boutton_sauvegarde {
+  width: 100%;
+  border-radius: 50px;
+  height: 40px;
+  border: none;
+  color: #0860fb;
+  background: #f0f3fe;
+  cursor: pointer;
+}
+
+.calendrier_boutton_sauvegarde {
+  margin-top: 10px;
+  color: white;
+  background: #0860fb;
+}
+
 </style>
