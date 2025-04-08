@@ -54,7 +54,8 @@ const dates = (j) => {
   jours.value = j
   const infos = reactive({
     'jours': j,
-    'mois': moisTab.value[mois.value]
+    'mois': moisTab.value[mois.value],
+    'annee': annee.value
   })
   emit('display',true, infos)
 }
@@ -64,7 +65,7 @@ defineProps({
 </script>
 
 <template>
-  <div class="calendrier">
+  <div :class="!heure?'calendrier':'calendrier2'">
     <div class="calendrier__header">
       <div class="calendrier_boutton_prec" @click="precedent"><img src="~/assets/images/fl-g.svg" alt="fleche-gauche" />
       </div>
@@ -103,9 +104,19 @@ defineProps({
   bottom: 0;
   font-size: 14px;
   height: 310px;
-  padding: 15px;
+  padding: 10px;
 }
-
+.calendrier2{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-self: center;
+  width: 100%;
+  bottom: 0;
+  font-size: 14px;
+  height: fit-content;
+  padding: 10px;
+}
 .calendrier__header {
   display: flex;
   justify-content: space-between;

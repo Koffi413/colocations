@@ -15,12 +15,21 @@ const heure = () => {
     heures.value = true
   }
 }
+const user = useWebsiteStore()
+const InfosTaches = reactive({
+  libelle: '',
+  date_debut: '',
+  date_fin: '',
+  username:user.utilisateur,
+  type: '',
+  status:''
+})
 </script>
 
 <template>
   <div class="container">
     <InputLibelleTache :show="display" :choix="jour" />
-    <Calendrier  :heure="heures" @display="recu" />
+    <Calendrier :heure="heures" @display="recu" />
     <div class="calendrier_footer">
       <button @click="heure" class="calendrier_boutton_heure">Définir une heure</button>
       <button class="calendrier_boutton_sauvegarde">Enregistrer</button>
@@ -61,5 +70,4 @@ const heure = () => {
   color: white;
   background: #0860fb;
 }
-
 </style>

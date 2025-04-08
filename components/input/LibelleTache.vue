@@ -7,7 +7,7 @@ const props = defineProps({
 <template>
   <div class="in">
     <input class="champ" type="text" placeholder="Quelle tâche à faire?">
-    <div v-if="props.show" class="date">{{ props.choix.value.jours }} {{ props.choix.value.mois }}</div>
+    <div v-if="props.show" class="date">{{ props.choix.value.jours }} {{ props.choix.value.mois }}{{ props.choix.annee}}</div>
   </div>
 </template>
 <style scoped>

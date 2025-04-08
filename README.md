@@ -1,28 +1,43 @@
-# Nuxt Minimal Starter
+# 🏠 Gestion de Tâches en Colocation
 
-Look at the [Nuxt documentation](https://nuxt.com/docs/getting-started/introduction) to learn more.
+Une application web pour faciliter l'organisation des tâches ménagères entre colocataires. Ce projet personnel a pour but de proposer une solution simple, intuitive et collaborative.
 
-## Setup
+---
 
-Make sure to install dependencies:
+## 🚀 Fonctionnalités
 
-```bash
-# npm
-npm install
+- Ajout / édition / suppression de tâches
+- Attribution des tâches aux colocataires
+- Marquage des tâches comme terminées
+- Suivi de la répartition et de l’historique des tâches
+- Authentification des utilisateurs (à venir)
+- Interface responsive (mobile & desktop)
 
-# pnpm
-pnpm install
+---
 
-# yarn
-yarn install
+## 🧰 Stack Technique
 
-# bun
-bun install
-```
+| Côté            | Technologies               |
+| --------------- | -------------------------- |
+| Frontend        | Vue.js, Nuxt.js            |
+| Backend         | API intégrée (Nuxt Server) |
+| Base de données | MySQL                      |
+| Tests API       | Insomnia                   |
+| Versionnement   | Git / GitHub               |
+
+---
+
+## 🛠️ Installation (mode développement)
+
+1. **Clone du repo :**
+   ```bash
+   git clone https://github.com/Koffi413/colocations
+   cd colocations
+   ```
 
 ## Development Server
 
-Start the development server on `http://localhost:3000`:
+Démarer le serveur de developpement sur `http://localhost:3000`:
 
 ```bash
 # npm
@@ -37,39 +52,3 @@ yarn dev
 # bun
 bun run dev
 ```
-
-## Production
-
-Build the application for production:
-
-```bash
-# npm
-npm run build
-
-# pnpm
-pnpm build
-
-# yarn
-yarn build
-
-# bun
-bun run build
-```
-
-Locally preview production build:
-
-```bash
-# npm
-npm run preview
-
-# pnpm
-pnpm preview
-
-# yarn
-yarn preview
-
-# bun
-bun run preview
-```
-
-Check out the [deployment documentation](https://nuxt.com/docs/getting-started/deployment) for more information.
